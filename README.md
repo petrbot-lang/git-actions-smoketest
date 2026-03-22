@@ -1,7 +1,13 @@
-# Git Actions Smoke Test
+# Git Actions Smoketest
 
-This repository is used to smoke-test GitHub Actions workflows.
+This repository is a minimal Node.js project to smoke-test GitHub Actions functionality.
 
 ## Quickstart
 
-Run `npm test` to verify the smoke test prints a confirmation message.
+Run the test script:
+
+```
+npm test
+```
+
+It prints a timestamped confirmation message to verify the workflow is working.
