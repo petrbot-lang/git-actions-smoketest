@@ -71,7 +71,6 @@ export default function Page() {
         >
           Sign Up
         </button>
-        </button>
         <div className="mt-8 w-full max-w-md h-48 bg-gray-800 rounded-lg flex items-center justify-center text-gray-500">
           [Product Screenshot Placeholder]
         </div>
@@ -119,12 +118,6 @@ export default function Page() {
   );
 }
 
-
-        </button>
-        <div className="mt-8 w-full max-w-md h-48 bg-gray-800 rounded-lg flex items-center justify-center text-gray-500">
-          [Product Screenshot Placeholder]
-        </div>
-      </section>
 
       <section className="grid grid-cols-1 md:grid-cols-3 gap-6 p-8">
         <div className="bg-gray-900 p-4 rounded">
