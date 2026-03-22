@@ -1,21 +1,21 @@
-"use client"
+"use client";
 
-import React from 'react'
+import React from 'react';
 
-export default function HomePage() {
+export default function Page() {
   const handleCTAClick = async () => {
-    console.log('Primary CTA clicked')
-    window.dispatchEvent(new CustomEvent('ctaClick', { detail: { label: 'Primary CTA' } }))
+    console.log('Primary CTA clicked');
+    window.dispatchEvent(new CustomEvent('cta-click', { detail: { action: 'Primary CTA' } }));
     try {
       await fetch('/api/track', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ label: 'Primary CTA' }),
-      })
+        body: JSON.stringify({ action: 'Primary CTA' }),
+      });
     } catch {
       // fail silently
     }
-  }
+  };
 
   return (
     <main className="bg-[#0B0B0D] min-h-screen text-white flex flex-col">
@@ -37,6 +37,89 @@ export default function HomePage() {
           className="bg-[#E11D48] hover:bg-[#BE123C] text-white py-3 px-6 rounded text-lg font-semibold"
         >
           Try Now
+        </button>
+      </section>
+
+      <section className="benefits p-8">
+        <div className="mb-6">
+          <h2 className="text-2xl font-bold mb-2">Benefit One</h2>
+          <p>Simple and fast to deploy</p>
+        </div>
+        <div className="mb-6">
+          <h2 className="text-2xl font-bold mb-2">Benefit Two</h2>
+          <p>Clean and minimal design</p>
+        </div>
+        <div>
+          <h2 className="text-2xl font-bold mb-2">Benefit Three</h2>
+          <p>Built with Next.js and Tailwind CSS</p>
+        </div>
+      </section>
+
+      <section className="trust p-8">
+        <blockquote className="italic text-center">
+          "This product changed our workflow completely!"
+          <br />
+          — Satisfied Customer
+        </blockquote>
+      </section>
+
+      <section className="final-cta mb-12 flex flex-col items-center">
+        <p className="mb-4">Ready to get started?</p>
+        <button
+          className="bg-[#E11D48] text-white py-2 px-4 rounded"
+          onClick={() => handleCTAClick()}
+        >
+          Sign Up
+        </button>
+        </button>
+        <div className="mt-8 w-full max-w-md h-48 bg-gray-800 rounded-lg flex items-center justify-center text-gray-500">
+          [Product Screenshot Placeholder]
+        </div>
+      </section>
+
+      <section className="grid grid-cols-1 md:grid-cols-3 gap-6 p-8">
+        <div className="bg-gray-900 p-4 rounded">
+          <h3 className="text-[#E11D48] font-bold mb-2">Benefit One</h3>
+          <p>Fast and lightweight</p>
+        </div>
+        <div className="bg-gray-900 p-4 rounded">
+          <h3 className="text-[#E11D48] font-bold mb-2">Benefit Two</h3>
+          <p>Easy to use</p>
+        </div>
+        <div className="bg-gray-900 p-4 rounded">
+          <h3 className="text-[#E11D48] font-bold mb-2">Benefit Three</h3>
+          <p>Responsive design</p>
+        </div>
+      </section>
+
+      <section className="p-8 bg-gray-900 text-center">
+        <p className="italic">"Super Simple saved our team hours every week!"</p>
+        <p className="mt-4">- Satisfied Customer</p>
+      </section>
+
+      <section className="p-8 border-t border-[#E11D48] text-center">
+        <p className="mb-4">Trusted by leading companies</p>
+        <div className="flex justify-center space-x-6">
+          <div className="bg-[#E11D48] w-16 h-8 flex items-center justify-center">Logo1</div>
+          <div className="bg-[#E11D48] w-16 h-8 flex items-center justify-center">Logo2</div>
+          <div className="bg-[#E11D48] w-16 h-8 flex items-center justify-center">Logo3</div>
+        </div>
+      </section>
+
+      <section className="p-8 text-center">
+        <button
+          onClick={handleCTAClick}
+          className="bg-[#E11D48] hover:bg-[#BE123C] text-white py-3 px-6 rounded text-lg font-semibold"
+        >
+          Final Call to Action
+        </button>
+      </section>
+      <Footer />
+    </main>
+  );
+}
+
+
         </button>
         <div className="mt-8 w-full max-w-md h-48 bg-gray-800 rounded-lg flex items-center justify-center text-gray-500">
           [Product Screenshot Placeholder]
@@ -95,4 +178,10 @@ export default function HomePage() {
       </footer>
     </main>
   )
+=======
+import LandingPage from './landing-page';
+
+export default function Page() {
+  return <LandingPage />;
+>>>>>>> 93e3004 (feat: add minimal Next.js landing page with black background and red accent theme)
 }

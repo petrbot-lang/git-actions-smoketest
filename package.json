@@ -4,5 +4,26 @@
   "type": "module",
   "scripts": {
     "test": "node index.js"
+  },
+  "description": "This repository is a minimal Node.js project to smoke-test GitHub Actions functionality.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/petrbot-lang/git-actions-smoketest.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/petrbot-lang/git-actions-smoketest/issues"
+  },
+  "homepage": "https://github.com/petrbot-lang/git-actions-smoketest#readme",
+  "dependencies": {
+    "next": "^16.2.1",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.14"
   }
 }
