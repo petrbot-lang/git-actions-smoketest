@@ -1,19 +1,18 @@
 "use client"
 
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
 
 export default function HomePage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [openFaq, setOpenFaq] = useState<number | null>(null)
 
   const handleCTAClick = useCallback(async (label: string) => {
-    console.log(`${label} clicked`)
-    window.dispatchEvent(new CustomEvent('ctaClick', { detail: { label } }))
+    window.dispatchEvent(new CustomEvent('ctaClick', { detail: { label, timestamp: Date.now() } }))
     try {
       await fetch('/api/track', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ label }),
+        body: JSON.stringify({ event: 'cta_click', label, timestamp: Date.now() }),
       })
     } catch {
       // silently fail
@@ -31,6 +30,24 @@ export default function HomePage() {
   const toggleFaq = useCallback((idx: number) => {
     setOpenFaq((prev) => (prev === idx ? null : idx))
   }, [])
+
+  const handleFaqKeyDown = useCallback((e: React.KeyboardEvent, idx: number) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault()
+      toggleFaq(idx)
+    }
+  }, [toggleFaq])
+
+  // Close mobile menu on Escape key
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && mobileMenuOpen) {
+        setMobileMenuOpen(false)
+      }
+    }
+    document.addEventListener('keydown', handleEscape)
+    return () => document.removeEventListener('keydown', handleEscape)
+  }, [mobileMenuOpen])
 
   const faqs = [
     {
@@ -93,6 +110,7 @@ export default function HomePage() {
             <button
               onClick={() => handleCTAClick('Header CTA')}
               className="hidden sm:inline-flex bg-[#E11D48] hover:bg-[#BE123C] focus:outline-none focus:ring-4 focus:ring-red-600/50 text-white font-semibold py-2 px-5 rounded-lg transition-colors duration-200 text-sm"
+              data-track="header-cta"
             >
               Get Started Free
             </button>
@@ -114,12 +132,15 @@ export default function HomePage() {
           </div>
         </div>
         {/* Mobile menu */}
-        {mobileMenuOpen && (
-          <nav
-            id="mobile-menu"
-            className="md:hidden border-t border-white/5 px-6 py-4 space-y-3 text-sm text-gray-400 animate-slide-down"
-            aria-label="Mobile navigation"
-          >
+        <div
+          id="mobile-menu"
+          role="navigation"
+          aria-label="Mobile navigation"
+          className={`md:hidden border-t border-white/5 overflow-hidden transition-all duration-300 ease-in-out ${
+            mobileMenuOpen ? 'max-h-80 opacity-100' : 'max-h-0 opacity-0 pointer-events-none'
+          }`}
+        >
+          <nav className="px-6 py-4 space-y-3 text-sm text-gray-400">
             {navLinks.map((link) => (
               <a
                 key={link.href}
@@ -133,11 +154,12 @@ export default function HomePage() {
             <button
               onClick={() => { handleCTAClick('Mobile Header CTA'); closeMobileMenu() }}
               className="w-full bg-[#E11D48] hover:bg-[#BE123C] text-white font-semibold py-2.5 rounded-lg transition-colors duration-200 text-sm mt-2"
+              data-track="mobile-header-cta"
             >
               Get Started Free
             </button>
           </nav>
-        )}
+        </div>
       </header>
 
       {/* Hero Section */}
@@ -157,7 +179,8 @@ export default function HomePage() {
         <div className="relative mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
           <button
             onClick={() => handleCTAClick('Hero CTA')}
-            className="cta-pulse bg-[#E11D48] hover:bg-[#BE123C] focus:outline-none focus:ring-4 focus:ring-red-600/50 text-white font-semibold py-4 px-10 rounded-lg text-lg transition-all duration-200 hover:shadow-lg hover:shadow-red-900/20 w-full sm:w-auto"
+            className="cta-pulse bg-[#E11D48] hover:bg-[#BE123C] focus:outline-none focus:ring-4 focus:ring-red-600/50 text-white font-semibold py-4 px-12 rounded-lg text-lg transition-all duration-200 hover:shadow-lg hover:shadow-red-900/20 w-full sm:w-auto"
+            data-track="hero-cta"
           >
             Start Your Free Trial
           </button>
@@ -177,7 +200,9 @@ export default function HomePage() {
       {/* Social Proof / Trust Logos */}
       <section className="max-w-5xl mx-auto px-6 py-12 text-center" aria-label="Trusted by leading companies">
         <p className="text-gray-500 text-xs uppercase tracking-[0.2em] mb-8">
+          <p className="text-gray-500 text-xs uppercase tracking-[0.2em] mb-8 font-semibold">
           Trusted by 2,000+ teams at leading companies
+        </p>
         </p>
         <div className="flex flex-wrap justify-center gap-x-12 gap-y-4 items-center">
           {['Stripe', 'Shopify', 'Vercel', 'Linear', 'Notion'].map((name) => (
@@ -455,7 +480,8 @@ export default function HomePage() {
             </ul>
             <button
               onClick={() => handleCTAClick('Pricing Free CTA')}
-              className="w-full border border-white/10 hover:border-[#E11D48]/50 text-white font-semibold py-3 rounded-lg transition-colors duration-200 text-sm"
+              className="w-full border border-white/10 hover:border-[#E11D48]/50 text-white font-semibold py-3 rounded-lg transition-colors duration-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#E11D48]/50"
+              data-track="pricing-free-cta"
             >
               Get Started
             </button>
@@ -484,6 +510,7 @@ export default function HomePage() {
             <button
               onClick={() => handleCTAClick('Pricing Pro CTA')}
               className="cta-pulse w-full bg-[#E11D48] hover:bg-[#BE123C] focus:outline-none focus:ring-4 focus:ring-red-600/50 text-white font-semibold py-3 rounded-lg transition-colors duration-200 text-sm"
+              data-track="pricing-pro-cta"
             >
               Start Free Trial
             </button>
