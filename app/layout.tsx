@@ -1,13 +1,13 @@
 import './globals.css'
 
 export const metadata = {
-  title: 'Simple Landing Page',
-  description: 'A minimal Next.js landing page with a black background and red accent theme.',
+  title: 'PetrBot — AI-Powered Workflow Automation',
+  description: 'Stop doing busywork. PetrBot automates repetitive tasks, surfaces actionable insights, and connects your tools so your team ships faster.',
   openGraph: {
-    title: 'Simple Landing Page',
-    description: 'A minimal Next.js landing page with a black background and red accent theme.',
+    title: 'PetrBot — AI-Powered Workflow Automation',
+    description: 'Stop doing busywork. PetrBot automates repetitive tasks, surfaces actionable insights, and connects your tools so your team ships faster.',
     type: 'website',
-    url: 'https://github.com/petrbot-lang/git-actions-smoketest',
+    url: 'https://petrbot.com',
     images: '/product-screenshot.png',
   },
 }
@@ -22,4 +22,3 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   )
 }
 
-// Added metadata export for SEO and Open Graph tags; applied exact background color per spec.
