@@ -199,10 +199,8 @@ export default function HomePage() {
 
       {/* Social Proof / Trust Logos */}
       <section className="max-w-5xl mx-auto px-6 py-12 text-center" aria-label="Trusted by leading companies">
-        <p className="text-gray-500 text-xs uppercase tracking-[0.2em] mb-8">
-          <p className="text-gray-500 text-xs uppercase tracking-[0.2em] mb-8 font-semibold">
+        <p className="text-gray-500 text-xs uppercase tracking-[0.2em] mb-8 font-semibold">
           Trusted by 2,000+ teams at leading companies
-        </p>
         </p>
         <div className="flex flex-wrap justify-center gap-x-12 gap-y-4 items-center">
           {['Stripe', 'Shopify', 'Vercel', 'Linear', 'Notion'].map((name) => (

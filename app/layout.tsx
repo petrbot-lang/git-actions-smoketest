@@ -1,12 +1,16 @@
+import type { Metadata } from 'next'
 import './globals.css'
 
-export const metadata = {
+export const metadata: Metadata = {
+  metadataBase: new URL('http://localhost:3001'),
   title: 'PetrBot — AI-Powered Workflow Automation',
-  description: 'Stop doing busywork. PetrBot automates repetitive tasks, surfaces actionable insights, and connects your tools so your team ships faster.',
+  description:
+    'Stop doing busywork. PetrBot automates repetitive tasks, surfaces actionable insights, and connects your tools so your team ships faster.',
   keywords: ['workflow automation', 'AI automation', 'team productivity', 'PetrBot', 'no-code automation'],
   openGraph: {
     title: 'PetrBot — AI-Powered Workflow Automation',
-    description: 'Stop doing busywork. PetrBot automates repetitive tasks, surfaces actionable insights, and connects your tools so your team ships faster.',
+    description:
+      'Stop doing busywork. PetrBot automates repetitive tasks, surfaces actionable insights, and connects your tools so your team ships faster.',
     type: 'website',
     url: 'https://petrbot.com',
     images: '/product-screenshot.png',
@@ -15,7 +19,8 @@ export const metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'PetrBot — AI-Powered Workflow Automation',
-    description: 'Stop doing busywork. PetrBot automates repetitive tasks, surfaces actionable insights, and connects your tools so your team ships faster.',
+    description:
+      'Stop doing busywork. PetrBot automates repetitive tasks, surfaces actionable insights, and connects your tools so your team ships faster.',
   },
   robots: {
     index: true,
@@ -32,9 +37,7 @@ export const viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className="bg-[#0B0B0D] text-white">
-        {children}
-      </body>
+      <body className="bg-[#0B0B0D] text-white">{children}</body>
     </html>
   )
 }
