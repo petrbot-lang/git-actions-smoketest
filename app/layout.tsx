@@ -1,6 +1,7 @@
 import './globals.css'
 
 export const metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_METADATA_BASE_URL || 'https://petrbot.com'),
   title: 'PetrBot — AI-Powered Workflow Automation',
   description: 'Stop doing busywork. PetrBot automates repetitive tasks, surfaces actionable insights, and connects your tools so your team ships faster.',
   keywords: ['workflow automation', 'AI automation', 'team productivity', 'PetrBot', 'no-code automation'],
